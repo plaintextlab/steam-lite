@@ -1,0 +1,28 @@
+"UserLocalConfigStore"
+{
+	"Software"
+	{
+		"Valve"
+		{
+			"Steam"
+			{
+				"apps"
+				{
+					"105600"
+					{
+						"LastPlayed"		"1792000000"
+						"Playtime"		"6"
+					}
+					"553850"
+					{
+						"LastPlayed"		"1000"
+					}
+					"not-a-number"
+					{
+						"LastPlayed"		"5"
+					}
+				}
+			}
+		}
+	}
+}

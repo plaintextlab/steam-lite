@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=steamlite
+GenericName=Game Launcher
+Comment=Launch installed Steam games without opening the Steam UI
+Exec=steamlite
+Icon=steam
+Terminal=false
+Categories=Game;
+Keywords=steam;games;launcher;
+StartupWMClass=steamlite
+StartupNotify=false

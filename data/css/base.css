@@ -1,0 +1,180 @@
+/* steamlite base stylesheet.
+ *
+ * Structure only. Every colour, size, radius and shadow comes from the
+ * custom properties a theme defines on :root (see midnight.css), so a
+ * theme is mostly a palette swap. Override anything in
+ * ~/.config/steamlite/style.css; it is loaded after this and live-reloaded.
+ */
+
+window.steamlite {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+/* Popovers and tooltips are separate surfaces, so set the font on each. */
+window.steamlite, popover, tooltip {
+  font-family: var(--font);
+  font-size: var(--font-size);
+}
+
+/* ---- header / search ------------------------------------------------ */
+
+.header {
+  background-color: var(--bg-alt);
+  border-bottom: var(--border-width) solid var(--border);
+  padding: var(--pad) var(--pad-wide);
+}
+
+entry.search {
+  background-color: var(--input-bg);
+  color: var(--fg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-small);
+  padding: 0 12px;
+  min-height: 32px;
+  box-shadow: none;
+  outline: none;
+  caret-color: var(--accent);
+  transition: border-color var(--t), box-shadow var(--t);
+}
+entry.search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+entry.search > text > placeholder { color: var(--fg-dim); }
+entry.search selection { background-color: var(--accent); color: var(--accent-fg); }
+
+/* ---- grid ------------------------------------------------------------ */
+
+scrolledwindow, viewport, flowbox { background: none; }
+flowbox.grid { padding: var(--pad-wide); }
+
+flowboxchild.tile {
+  padding: var(--tile-pad);
+  border-radius: var(--radius);
+  background: none;
+  outline: none;
+  transition: background-color var(--t);
+}
+flowboxchild.tile:hover { background-color: var(--tile-hover); }
+flowboxchild.tile:selected { background-color: var(--tile-selected); }
+
+.tile .cover {
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--cover-shadow);
+  transition: transform var(--t), box-shadow var(--t);
+}
+.tile:hover .cover {
+  transform: translateY(var(--lift));
+  box-shadow: var(--cover-shadow-hover);
+}
+/* The selected tile is the keyboard cursor: give it an unmistakable ring. */
+.tile:selected .cover {
+  box-shadow: var(--focus-shadow);
+}
+.tile:selected:hover .cover { box-shadow: var(--focus-shadow); }
+
+.tile .title {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: var(--title-size);
+  color: var(--fg);
+}
+.tile:selected .title { color: var(--title-selected); }
+.tile .subtitle {
+  font-size: var(--sub-size);
+  color: var(--fg-dim);
+}
+
+.placeholder {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--ph-fg);
+}
+.ph-0 { background-color: var(--ph-0); }
+.ph-1 { background-color: var(--ph-1); }
+.ph-2 { background-color: var(--ph-2); }
+.ph-3 { background-color: var(--ph-3); }
+.ph-4 { background-color: var(--ph-4); }
+.ph-5 { background-color: var(--ph-5); }
+
+.badge {
+  margin: 6px;
+  padding: 1px 6px;
+  border-radius: var(--radius-small);
+  background-color: var(--badge-bg);
+  color: var(--badge-fg);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.empty { color: var(--fg-dim); font-size: 15px; }
+
+/* ---- status line ------------------------------------------------------- */
+
+.statusbar {
+  background-color: var(--bg-alt);
+  border-top: var(--border-width) solid var(--border);
+  padding: 3px var(--pad-wide);
+  font-size: var(--sub-size);
+  color: var(--fg-dim);
+}
+.statusbar .message { color: var(--fg); }
+.statusbar .steam.running { color: var(--ok); }
+.statusbar .steam.stopped { color: var(--warn); }
+.statusbar button.sort {
+  background: none;
+  border: none;
+  box-shadow: none;
+  min-height: 0;
+  padding: 1px 6px;
+  color: var(--fg-dim);
+  border-radius: var(--radius-small);
+  transition: color var(--t), background-color var(--t);
+}
+.statusbar button.sort:hover { color: var(--fg); background-color: var(--tile-hover); }
+
+/* ---- popovers, tooltips, scrollbars ------------------------------------- */
+
+popover.menu > contents {
+  background-color: var(--bg-alt);
+  color: var(--fg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-small);
+  box-shadow: var(--popover-shadow);
+  padding: 4px;
+}
+popover.menu button.menuitem {
+  padding: 5px 14px;
+  border: none;
+  border-radius: var(--radius-small);
+  background: none;
+  box-shadow: none;
+  outline: none;
+  color: var(--fg);
+  min-height: 0;
+  font-weight: normal;
+}
+popover.menu button.menuitem:hover,
+popover.menu button.menuitem:focus {
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+tooltip, tooltip.background {
+  background-color: var(--bg-alt);
+  color: var(--fg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-small);
+  box-shadow: none;
+}
+
+scrollbar { background: none; border: none; }
+scrollbar slider {
+  background-color: var(--scroll);
+  border-radius: 99px;
+  min-width: 6px;
+  min-height: 6px;
+  border: none;
+}
+scrollbar slider:hover { background-color: var(--fg-dim); }

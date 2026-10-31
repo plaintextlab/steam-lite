@@ -1,0 +1,8 @@
+"AppState"
+{
+	"appid"		"999999"
+	"name"		"Half Downloaded Game"
+	"StateFlags"		"1026"
+	"installdir"		"HDG"
+	"SizeOnDisk"		"10"
+}

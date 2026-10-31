@@ -1,0 +1,122 @@
+/* cde: CDE/Motif. Flat muted teal and tan, bevelled 3D borders, square
+ * corners, no shadows, no lift, monospace "bitmap" type. */
+:root {
+  --bg: #6f9a96;
+  --bg-alt: #c8b58f;
+  --surface: #5c8581;
+  --input-bg: #d9cba9;
+  --fg: #000000;
+  --fg-dim: #2a2a22;
+  --border: #000000;
+  --border-width: 0;
+
+  --accent: #2d4f63;
+  --accent-fg: #ffffff;
+  --accent-glow: transparent;
+  --title-selected: #ffffff;
+
+  --ok: #0f4d12;
+  --warn: #7a1f00;
+  --badge-bg: #c8b58f;
+  --badge-fg: #000000;
+  --scroll: #c8b58f;
+
+  --bevel-light: #e8dcc0;
+  --bevel-dark: #6e6046;
+  --teal-light: #a6c6c2;
+  --teal-dark: #3c5a57;
+
+  --tile-hover: transparent;
+  --tile-selected: transparent;
+  --cover-shadow: none;
+  --cover-shadow-hover: none;
+  --focus-shadow: none;
+  --popover-shadow: none;
+  --lift: 0;
+
+  --ph-fg: #000000;
+  --ph-0: #c8b58f;
+  --ph-1: #a8b88a;
+  --ph-2: #b9a3a0;
+  --ph-3: #9fb3c4;
+  --ph-4: #c4a878;
+  --ph-5: #b0b0a0;
+
+  --radius: 0;
+  --radius-small: 0;
+  --pad: 6px;
+  --pad-wide: 10px;
+  --tile-pad: 6px;
+  --font: "Terminus", "Fixed", "Misc Fixed", "DejaVu Sans Mono", monospace;
+  --font-size: 13px;
+  --title-size: 12px;
+  --sub-size: 11px;
+  --t: 60ms linear;
+}
+
+/* Raised bevel on panels, sunken bevel on inputs, à la Motif. */
+.header, .statusbar {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+}
+
+entry.search {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark);
+  box-shadow: none;
+}
+entry.search:focus-within {
+  outline: 2px solid #000000;
+  outline-offset: 1px;
+  box-shadow: none;
+}
+
+.tile .cover {
+  border-style: solid;
+  border-width: 3px;
+  border-color: var(--teal-light) var(--teal-dark) var(--teal-dark) var(--teal-light);
+}
+/* Selected tile looks "pressed in" and gets a hard black focus box. */
+.tile:selected .cover {
+  border-color: var(--teal-dark) var(--teal-light) var(--teal-light) var(--teal-dark);
+}
+flowboxchild.tile:selected {
+  outline: 2px solid #000000;
+  outline-offset: -2px;
+}
+.tile .title, .tile .subtitle { padding: 0 3px; }
+.tile:selected .title { background-color: var(--accent); }
+
+.badge {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+}
+
+.statusbar button.sort {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+  background-color: var(--bg-alt);
+}
+.statusbar button.sort:hover { background-color: var(--input-bg); }
+.statusbar button.sort:active {
+  border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark);
+}
+
+popover.menu > contents {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+}
+
+scrollbar slider {
+  border-radius: 0;
+  min-width: 12px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+}
+scrollbar trough { background-color: var(--teal-dark); }

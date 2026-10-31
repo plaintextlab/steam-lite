@@ -1,0 +1,14 @@
+﻿// leading comment
+"Root"
+{
+	"Quoted"	"has \"escaped\" quotes \\ and\ttab"  // trailing comment
+	Unquoted	bare_value
+	"Platform"	"linux"	[$LINUX]
+	"Path"		"C:\Games\New Folder"
+	"Multi"		"line one
+line two"
+	"Empty"		""
+	"Nested" { "deep" { "KEY" "v" } }
+	"Dup"	"first"
+	"Dup"	"second"
+}

@@ -1,0 +1,51 @@
+/* paper: warm off-white, high-contrast ink, terracotta accent. */
+:root {
+  --bg: #f4efe4;
+  --bg-alt: #e9e2d3;
+  --surface: #ddd5c3;
+  --input-bg: #fbf8f1;
+  --fg: #16140f;
+  --fg-dim: #4f4a40;
+  --border: #c9bfa9;
+  --border-width: 1px;
+
+  --accent: #a83a12;
+  --accent-fg: #fffaf0;
+  --accent-glow: rgba(168, 58, 18, 0.30);
+  --title-selected: #8a2d0c;
+
+  --ok: #2f6b3a;
+  --warn: #9a5a00;
+  --badge-bg: #16140f;
+  --badge-fg: #f4efe4;
+  --scroll: #c2b8a2;
+
+  --tile-hover: rgba(80, 60, 20, 0.05);
+  --tile-selected: rgba(168, 58, 18, 0.07);
+  --cover-shadow: 0 2px 6px rgba(70, 50, 20, 0.22);
+  --cover-shadow-hover: 0 8px 16px rgba(70, 50, 20, 0.28);
+  --focus-shadow: 0 0 0 3px #a83a12, 0 6px 16px rgba(168, 58, 18, 0.30);
+  /* No popover shadow: its transparent margin gets blurred by compositors
+     like picom and looks like a frosted box. The border does the job. */
+  --popover-shadow: none;
+  --lift: -3px;
+
+  --ph-fg: #fffaf0;
+  --ph-0: #8c6d4f;
+  --ph-1: #6f7a5a;
+  --ph-2: #5f7480;
+  --ph-3: #94604f;
+  --ph-4: #7a6a88;
+  --ph-5: #a0844a;
+
+  --radius: 6px;
+  --radius-small: 5px;
+  --pad: 8px;
+  --pad-wide: 14px;
+  --tile-pad: 8px;
+  --font: "Inter", "Cantarell", "Noto Sans", sans-serif;
+  --font-size: 13px;
+  --title-size: 12px;
+  --sub-size: 11px;
+  --t: 120ms ease-out;
+}

@@ -1,0 +1,12 @@
+"AppState"
+{
+	"appid"		"228980"
+	"name"		"Steamworks Common Redistributables"
+	"StateFlags"		"4"
+	"installdir"		"Steamworks Shared"
+	"SizeOnDisk"		"234285509"
+	"InstallScripts"
+	{
+		"228983"		"_CommonRedist\\vcredist\\2010\\installscript.vdf"
+	}
+}
