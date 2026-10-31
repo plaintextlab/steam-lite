@@ -79,6 +79,11 @@ impl Config {
 }
 
 pub fn config_dir() -> PathBuf {
+    // Inside Flatpak XDG_CONFIG_HOME points into ~/.var/app; keep using the
+    // real ~/.config/steamlite (the manifest grants access to it).
+    if crate::launcher::in_flatpak() {
+        return home_dir().join(".config/steamlite");
+    }
     std::env::var_os("XDG_CONFIG_HOME")
         .map(PathBuf::from)
         .filter(|p| p.is_absolute())

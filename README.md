@@ -20,6 +20,58 @@ the background (`steam -silent`), and steamlite launches games through it with
 
 ## Install
 
+### From source, any distro (recommended)
+
+```bash
+git clone https://github.com/plaintextlab/steam-lite && cd steam-lite && ./install.sh
+```
+
+`install.sh` detects your distro and installs everything the build needs
+(Rust/cargo, pkg-config, a C compiler, the GTK 4 development files), using
+`sudo` or `doas` for the package step only. It then builds steamlite and
+installs it to `~/.local`. It supports Void, Arch and derivatives,
+Debian/Ubuntu and derivatives, Fedora/RHEL-likes, openSUSE and Alpine.
+
+- If your distro's Rust is older than 1.83, it installs a current one with
+  rustup instead.
+- If your GTK is older than 4.16, it stops and points you to the Flatpak.
+
+Options: `--system` (install to `/usr/local`), `--deps-only`, `--uninstall`,
+`--dry-run` (print the commands without running them).
+
+### Packages
+
+Prebuilt packages are on the
+[releases page](https://github.com/plaintextlab/steam-lite/releases).
+
+| Package | Works on |
+|---|---|
+| `steamlite_<ver>_amd64.deb` | Debian 13+, Ubuntu 25.04+ (needs GTK ≥ 4.16) |
+| `steamlite-<ver>-1.x86_64.rpm` | Fedora 41+, openSUSE Tumbleweed |
+| `steamlite-<ver>.flatpak` | Any distro with Flatpak (pulls the GNOME 51 runtime) |
+
+```bash
+sudo apt install ./steamlite_0.1.0_amd64.deb
+```
+
+```bash
+sudo dnf install ./steamlite-0.1.0-1.x86_64.rpm
+```
+
+```bash
+flatpak install --user ./steamlite-0.1.0.flatpak
+```
+
+The Flatpak reads your Steam files read-only (`--filesystem=host:ro`), keeps
+its config in the usual `~/.config/steamlite`, and starts the host's `steam`
+through `flatpak-spawn --host`. That last permission
+(`--talk-name=org.freedesktop.Flatpak`) means the sandbox can run commands on
+the host, which a launcher needs. The window class is still `steamlite`, so the i3
+rule below works unchanged.
+
+Packages are built with the scripts in `packaging/` (`build-deb.sh`,
+`build-rpm.sh`, `build-flatpak.sh`, `build-appimage.sh`), into `dist/`.
+
 ### Arch Linux
 
 From a checkout of this repository:
@@ -33,20 +85,10 @@ The PKGBUILD builds the checkout it sits in, runs the tests and installs
 
 ### Manually
 
-Needs Rust ≥ 1.83 and GTK ≥ 4.16 development files (`gtk4` on Arch,
-`libgtk-4-dev` on Debian/Ubuntu).
-
-```bash
-cargo build --release
-```
-
-```bash
-install -Dm755 target/release/steamlite ~/.local/bin/steamlite
-```
-
-```bash
-install -Dm644 data/steamlite.desktop ~/.local/share/applications/steamlite.desktop
-```
+Install Rust ≥ 1.83, pkg-config, a C compiler and the GTK ≥ 4.16
+development files (the package names per distro are in `install.sh`). Then
+run `cargo build --release` and copy `target/release/steamlite` onto your
+PATH.
 
 ## i3 / sway
 

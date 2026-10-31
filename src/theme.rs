@@ -5,7 +5,7 @@
 //! lose to ~/.config/gtk-4.0/gtk.css (800), which commonly carries global
 //! rules like `* { border-radius: 0; }`.
 
-use gtk::{gdk, gio, prelude::*};
+use gtk::{gdk, gio, glib, prelude::*};
 use std::cell::RefCell;
 use std::path::{Path, PathBuf};
 
@@ -51,7 +51,16 @@ impl Theme {
     /// Apply a built-in theme by name (unknown names fall back to midnight).
     pub fn set_builtin(&self, display: &gdk::Display, name: &str) {
         let (_, css, dark) = THEMES.iter().find(|(n, ..)| *n == name).unwrap_or(&THEMES[0]);
-        gtk::Settings::for_display(display).set_gtk_application_prefer_dark_theme(*dark);
+        let settings = gtk::Settings::for_display(display);
+        // GTK 4.20 replaced prefer-dark with gtk-interface-color-scheme.
+        let scheme = settings
+            .find_property("gtk-interface-color-scheme")
+            .and_then(|p| p.downcast::<glib::ParamSpecEnum>().ok())
+            .and_then(|p| p.enum_class().to_value_by_nick(if *dark { "dark" } else { "light" }));
+        match scheme {
+            Some(v) => settings.set_property_from_value("gtk-interface-color-scheme", &v),
+            None => settings.set_gtk_application_prefer_dark_theme(*dark),
+        }
         // Base first: theme rules after it win at equal specificity.
         self.builtin.load_from_string(&format!("{BASE}\n{css}"));
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.plaintextlab.steamlite</id>
+  <name>steamlite</name>
+  <summary>Lightweight launcher for installed Steam games</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.plaintextlab">
+    <name>Bitangsha Ray</name>
+  </developer>
+  <description>
+    <p>
+      steamlite shows your installed Steam games as a fast, keyboard-driven
+      grid of covers and launches them through the Steam client running hidden
+      in the background, so you never have to open Steam's heavy UI.
+    </p>
+    <p>
+      It reads Steam's library files read-only, uses the local cover cache,
+      and ships three themes (midnight, paper and a retro CDE look) that you
+      can override with your own CSS.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.plaintextlab.steamlite.desktop</launchable>
+  <url type="homepage">https://github.com/plaintextlab/steam-lite</url>
+  <url type="bugtracker">https://github.com/plaintextlab/steam-lite/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/plaintextlab/steam-lite/main/screenshots/midnight.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-10-31"/>
+  </releases>
+</component>

@@ -7,9 +7,23 @@ use std::os::unix::process::CommandExt;
 use std::path::Path;
 use std::process::{Command, Stdio};
 
+/// Running as a Flatpak? Then host processes are invisible in `/proc` and
+/// `steam` has to be started on the host through `flatpak-spawn --host`.
+pub fn in_flatpak() -> bool {
+    Path::new("/.flatpak-info").exists()
+}
+
 /// Is the Steam client running? Checks `steam.pid` files first, then falls
 /// back to scanning `/proc` for a process named `steam` (cheaper than pgrep).
 pub fn steam_running(home: &Path) -> bool {
+    if in_flatpak() {
+        return Command::new("flatpak-spawn")
+            .args(["--host", "pgrep", "-x", "steam"])
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .status()
+            .is_ok_and(|s| s.success());
+    }
     let pid_files = [
         home.join(".steam/steam.pid"),
         home.join(".var/app/com.valvesoftware.Steam/.steam/steam.pid"),
@@ -31,8 +45,17 @@ fn is_steam_pid(pid: u32) -> bool {
     fs::read_to_string(format!("/proc/{pid}/comm")).is_ok_and(|c| c.trim_end() == "steam")
 }
 
-/// Resolve the configured steam command into argv.
+/// Resolve the configured steam command into argv (wrapped in
+/// `flatpak-spawn --host` when sandboxed).
 pub fn steam_argv(configured: &str, kind: RootKind) -> Vec<String> {
+    let argv = configured_argv(configured, kind);
+    if in_flatpak() {
+        return ["flatpak-spawn", "--host"].iter().map(|s| s.to_string()).chain(argv).collect();
+    }
+    argv
+}
+
+fn configured_argv(configured: &str, kind: RootKind) -> Vec<String> {
     let cmd = configured.trim();
     if cmd.is_empty() || cmd == "auto" {
         return match kind {

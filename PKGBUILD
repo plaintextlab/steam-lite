@@ -38,6 +38,8 @@ package() {
   cd "$(_src)"
   install -Dm755 "$srcdir/target/release/steamlite" "$pkgdir/usr/bin/steamlite"
   install -Dm644 data/steamlite.desktop "$pkgdir/usr/share/applications/steamlite.desktop"
+  install -Dm644 data/steamlite.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/steamlite.svg"
+  install -Dm644 data/steamlite.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/steamlite.png"
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
