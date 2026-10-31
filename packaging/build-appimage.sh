@@ -16,18 +16,17 @@ chmod +x "$tools"/*
 appdir="$BUILD/AppDir"
 rm -rf "$appdir"
 stage_files "$appdir"
-install -Dm644 "$ROOT/data/io.github.plaintextlab.steamlite.metainfo.xml" \
-    "$appdir/usr/share/metainfo/steamlite.appdata.xml"
-# appstream wants the metainfo id to match the desktop file name.
-sed -i 's/io.github.plaintextlab.steamlite.desktop/steamlite.desktop/; s#<id>io.github.plaintextlab.steamlite</id>#<id>steamlite</id>#' \
-    "$appdir/usr/share/metainfo/steamlite.appdata.xml"
+# AppStream wants a reverse-DNS id whose desktop file has the same name.
+id=io.github.plaintextlab.steamlite
+mv "$appdir/usr/share/applications/steamlite.desktop" "$appdir/usr/share/applications/$id.desktop"
+install -Dm644 "$ROOT/data/$id.metainfo.xml" "$appdir/usr/share/metainfo/$id.metainfo.xml"
 
 export PATH="$tools:$PATH" APPIMAGE_EXTRACT_AND_RUN=1 DEPLOY_GTK_VERSION=4
 export LDAI_OUTPUT="$DIST/steamlite-$VERSION-x86_64.AppImage" LINUXDEPLOY_OUTPUT_VERSION="$VERSION"
 cd "$BUILD"
 linuxdeploy-x86_64.AppImage --appdir "$appdir" \
     --executable "$appdir/usr/bin/steamlite" \
-    --desktop-file "$appdir/usr/share/applications/steamlite.desktop" \
+    --desktop-file "$appdir/usr/share/applications/$id.desktop" \
     --icon-file "$ROOT/data/steamlite.svg" \
     --plugin gtk --output appimage
 echo "$LDAI_OUTPUT"
